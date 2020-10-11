@@ -6,14 +6,16 @@ import collections
 
 
 # Run the 3D face alignment on a test image, without CUDA.
-fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._3D, device='cpu', flip_input=True)
+fa = face_alignment.FaceAlignment(face_alignment.LandmarksType._3D, device='cuda', flip_input=True)
 
 try:
     input_img = io.imread('../test/assets/aflw-test.jpg')
 except FileNotFoundError:
     input_img = io.imread('test/assets/aflw-test.jpg')
 
+print("GOING...")
 preds = fa.get_landmarks(input_img)[-1]
+print("DONE.")
 
 # 2D-Plot
 plot_style = dict(marker='o',
